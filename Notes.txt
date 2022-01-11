@@ -1,0 +1,19 @@
+# January 2022
+
+Create GitHub repository, create README.md, licence, etc.
+
+Then
+>>git init
+>>git remote add origin https://github.com/Jorge-Monge/geoEnrichment.git
+>>git pull origin main
+
+# Ready to crack on
+
+PLAN OF ACTION
+    - Create cloud instance of PostgreSQL with PostGIS (DONE)
+    - Create Python scripts capable of managing the remote DB
+        (create/delete tables, insert records, etc)
+    - Create simply NodeJS function capable of executing queries against the DB
+    - Enhance the above functionality to execute spatial queries
+    - Modify the NodeJS function to accept data through POST requests
+    - Modify the NodeJS function to return the enriched data
