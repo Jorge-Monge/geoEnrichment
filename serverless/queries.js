@@ -31,7 +31,7 @@ const getCentroids = (request, response) => {
   // );
   response
     .status(200)
-    .json({ name: "Lake Park", longitude: -114, latitude: 52.0 });
+    .json([{ name: "Lake Park", longitude: -114, latitude: 52.0 }]);
 };
 
 module.exports = { get10FirstParks, getCentroids };
