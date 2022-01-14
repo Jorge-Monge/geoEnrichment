@@ -20,6 +20,7 @@ const get10FirstParks = (request, response) => {
 };
 
 const getCentroids = async () => {
+  return { message: "All DATA RETRIEVED" };
   return pool.query(
     'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
     (error, results) => {
