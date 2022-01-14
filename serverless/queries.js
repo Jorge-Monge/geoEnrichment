@@ -19,7 +19,6 @@ const get10FirstParks = (request, response) => {
   );
 };
 
-/*
 const getCentroids = (request, response) => {
   console.log("In getCentroids...");
   pool.query(
@@ -27,18 +26,17 @@ const getCentroids = (request, response) => {
     (error, results) => {
       if (error) {
         console.log("*** ERROR ***", error);
-        response.status(200).json({ message: "Error" });
-        //throw error;
+        //response.status(200).json({ message: "Error" });
+        throw error;
       }
       console.log("*** RESULTS ***", results.row);
-      response.status(200).json({ message: "All OK" });
+      response.status(200).json({ message: "All DATA RETRIEVED" });
     }
   );
-  
 };
-*/
-const getCentroids = async () => {
-  return { message: "all OK" };
-};
+
+// const getCentroids = async () => {
+//   return { message: "all OK" };
+// };
 
 module.exports = { get10FirstParks, getCentroids };
