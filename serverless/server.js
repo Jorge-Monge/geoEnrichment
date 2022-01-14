@@ -50,11 +50,13 @@ router.get("/", (req, res) => {
   res.end();
 });
 
-const getCentroids = () => {
+const getCentroids = async () => {
   return { message: "all OK" };
 };
 
-router.get("/getCentroids", (req, res) => res.json({ message: "all OK" }));
+router.get("/getCentroids", (req, res) =>
+  getCentroids().then((res) => res.json({ message: "all OK" }))
+);
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
