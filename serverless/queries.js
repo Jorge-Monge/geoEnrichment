@@ -22,16 +22,12 @@ const get10FirstParks = (request, response) => {
 const getCentroids = async () => {
   try {
     const res = await pool.query(
-      'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10'
+      'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas'
     );
     return res.rows;
   } catch (err) {
     return { error: err.stack };
   }
 };
-
-// const getCentroids = async () => {
-//   return { message: "all OK" };
-// };
 
 module.exports = { get10FirstParks, getCentroids };
