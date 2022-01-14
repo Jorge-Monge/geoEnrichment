@@ -50,12 +50,12 @@ router.get("/", (req, res) => {
   res.end();
 });
 
-const getCentroids = async () => {
-  return { message: "all OK" };
-};
+// const getCentroids = async () => {
+//   return { message: "all OK" };
+// };
 
 router.get("/getCentroids", (req, res) => {
-  getCentroids().then((response) => {
+  db.getCentroids().then((response) => {
     return res.json(response);
   });
 });
