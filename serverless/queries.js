@@ -37,7 +37,7 @@ const getCentroids = (request, response) => {
   
 };
 */
-const getCentroids = () => {
+const getCentroids = async () => {
   return { message: "all OK" };
 };
 
