@@ -55,7 +55,7 @@ const getCentroids = async () => {
 };
 
 router.get("/getCentroids", (req, res) =>
-  getCentroids().then((res) => res.json({ message: "all OK" }))
+  getCentroids().then((res) => res.json())
 );
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
