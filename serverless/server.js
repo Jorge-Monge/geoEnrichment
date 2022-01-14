@@ -49,7 +49,10 @@ router.get("/", (req, res) => {
   res.write("<h1>Express.js + PostgreSQL!</h1>");
   res.end();
 });
-router.get("/getCentroids", (req, res) => res.json(db.getCentroids));
+//db.getCentroids
+router.get("/getCentroids", (req, res) =>
+  res.json({ message: "working on it" })
+);
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
