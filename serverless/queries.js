@@ -20,12 +20,15 @@ const get10FirstParks = (request, response) => {
 };
 
 const getCentroids = (request, response) => {
+  console.log("In getCentroids...");
   pool.query(
     'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
     (error, results) => {
       if (error) {
+        console.log("*** ERROR ***", error);
         throw error;
       }
+      console.log("*** RESULTS ***", results.row);
       response.status(200).json(results.rows);
     }
   );
