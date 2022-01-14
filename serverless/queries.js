@@ -1,11 +1,11 @@
+const user = process.env.PGDB_USER;
+const host = process.env.PGDB_HOST;
+const database = process.env.PGDB_DATABASE;
+const password = process.env.PGDB_PASSWORD;
+const port = 5432;
+
 const Pool = require("pg").Pool;
-const pool = new Pool({
-  user: "user",
-  host: "host",
-  database: "database",
-  password: "password",
-  port: 5432,
-});
+const pool = new Pool({ user, host, database, password, port });
 
 const get10FirstParks = (request, response) => {
   pool.query(
@@ -20,18 +20,15 @@ const get10FirstParks = (request, response) => {
 };
 
 const getCentroids = (request, response) => {
-  // pool.query(
-  //   'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
-  //   (error, results) => {
-  //     if (error) {
-  //       throw error;
-  //     }
-  //     response.status(200).json(results.rows);
-  //   }
-  // );
-  response
-    .status(200)
-    .json([{ name: "Lake Park", longitude: -114, latitude: 52.0 }]);
+  pool.query(
+    'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    }
+  );
 };
 
 module.exports = { get10FirstParks, getCentroids };
