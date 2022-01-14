@@ -35,16 +35,21 @@ const db = require("./queries");
 //   }
 // };
 
-exports.handler = function (event, context, callback) {
-  if (event.httpMethod === "GET" && event.path === "/test") {
-    callback(null, {
-      statusCode: 200,
-      body: "Hello",
-    });
-  } else {
-    callback(null, {
-      statusCode: 400,
-      body: {},
-    });
-  }
-};
+("use strict");
+const express = require("express");
+const serverless = require("serverless-http");
+const app = express();
+const bodyParser = require("body-parser");
+
+function updateDatabase() {
+  // update the database
+  return "This is data";
+}
+
+app.use(bodyParser);
+app.get("/getData", (req, res) => {
+  const newValue = updateDatabase();
+  res.json({ response: newValue });
+});
+
+module.exports.handler = serverless(app);
