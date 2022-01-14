@@ -2,35 +2,49 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./queries");
 
-exports.handler = async (event, context) => {
-  try {
-    const app = express();
-    const port = 3000;
+// exports.handler = async (event, context) => {
+//   try {
+//     const app = express();
+//     const port = 3000;
 
-    app.use(bodyParser.json());
-    app.use(
-      bodyParser.urlencoded({
-        extended: true,
-      })
-    );
+//     app.use(bodyParser.json());
+//     app.use(
+//       bodyParser.urlencoded({
+//         extended: true,
+//       })
+//     );
 
-    app.get("/", (request, response) => {
-      response.json({ info: "Node.js, Express, and Postgres API" });
-    });
+//     app.get("/", (request, response) => {
+//       response.json({ info: "Node.js, Express, and Postgres API" });
+//     });
 
-    app.get("/get10FirstParks", db.get10FirstParks);
+//     app.get("/get10FirstParks", db.get10FirstParks);
 
-    app.get("/getCentroid", db.getCentroid);
+//     app.get("/getCentroid", db.getCentroid);
 
-    app.listen(port, () => {
-      console.log(`App running on port ${port}.`);
-    });
+//     app.listen(port, () => {
+//       console.log(`App running on port ${port}.`);
+//     });
 
-    return {
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify(),
+//     };
+//   } catch (err) {
+//     return { statusCode: 422, body: err.stack };
+//   }
+// };
+
+exports.handler = function (event, context, callback) {
+  if (event.httpMethod === "GET" && event.path === "/test") {
+    callback(null, {
       statusCode: 200,
-      body: JSON.stringify(),
-    };
-  } catch (err) {
-    return { statusCode: 422, body: err.stack };
+      body: "Hello",
+    });
+  } else {
+    callback(null, {
+      statusCode: 400,
+      body: {},
+    });
   }
 };
