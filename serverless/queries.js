@@ -19,16 +19,19 @@ const get10FirstParks = (request, response) => {
   );
 };
 
-const getCentroid = (request, response) => {
-  pool.query(
-    'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    }
-  );
+const getCentroids = (request, response) => {
+  // pool.query(
+  //   'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
+  //   (error, results) => {
+  //     if (error) {
+  //       throw error;
+  //     }
+  //     response.status(200).json(results.rows);
+  //   }
+  // );
+  response
+    .status(200)
+    .json({ name: "Lake Park", longitude: -114, latitude: 52.0 });
 };
 
-module.exports = { get10FirstParks, getCentroid };
+module.exports = { get10FirstParks, getCentroids };
