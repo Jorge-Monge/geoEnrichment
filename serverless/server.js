@@ -50,9 +50,7 @@ router.get("/", (req, res) => {
   res.end();
 });
 //db.getCentroids
-router.get("/getCentroids", (req, res) =>
-  res.json({ message: db.getCentroids })
-);
+router.get("/getCentroids", (req, res) => res.json(db.getCentroids));
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 

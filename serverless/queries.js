@@ -26,10 +26,11 @@ const getCentroids = (request, response) => {
     (error, results) => {
       if (error) {
         console.log("*** ERROR ***", error);
-        throw error;
+        response.status(200).json({ message: "Error" });
+        //throw error;
       }
       console.log("*** RESULTS ***", results.row);
-      response.status(200).json({ message: "Hola" });
+      response.status(200).json({ message: "All OK" });
     }
   );
 };
