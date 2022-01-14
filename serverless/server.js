@@ -49,8 +49,12 @@ router.get("/", (req, res) => {
   res.write("<h1>Express.js + PostgreSQL!</h1>");
   res.end();
 });
-//db.getCentroids
-router.get("/getCentroids", (req, res) => res.json(db.getCentroids));
+
+const getCentroids = () => {
+  return { message: "all OK" };
+};
+
+router.get("/getCentroids", (req, res) => res.json(getCentroids()));
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
