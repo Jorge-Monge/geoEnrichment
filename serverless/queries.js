@@ -19,24 +19,24 @@ const get10FirstParks = (request, response) => {
   );
 };
 
-const getCentroids = (request, response) => {
-  console.log("In getCentroids...");
-  pool.query(
-    'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
-    (error, results) => {
-      if (error) {
-        console.log("*** ERROR ***", error);
-        //response.status(200).json({ message: "Error" });
-        throw error;
-      }
-      console.log("*** RESULTS ***", results.row);
-      response.status(200).json({ message: "All DATA RETRIEVED" });
-    }
-  );
-};
-
-// const getCentroids = async () => {
-//   return { message: "all OK" };
+// const getCentroids = (request, response) => {
+//   console.log("In getCentroids...");
+//   pool.query(
+//     'SELECT name AS "Park Name", ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude, ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude FROM parks_protected_areas LIMIT 10',
+//     (error, results) => {
+//       if (error) {
+//         console.log("*** ERROR ***", error);
+//         //response.status(200).json({ message: "Error" });
+//         throw error;
+//       }
+//       console.log("*** RESULTS ***", results.row);
+//       response.status(200).json({ message: "All DATA RETRIEVED" });
+//     }
+//   );
 // };
+
+const getCentroids = async () => {
+  return { message: "all OK" };
+};
 
 module.exports = { get10FirstParks, getCentroids };
