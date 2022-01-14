@@ -54,7 +54,7 @@ const getCentroids = () => {
   return { message: "all OK" };
 };
 
-router.get("/getCentroids", (req, res) => res.json(getCentroids()));
+router.get("/getCentroids", (req, res) => res.json({ message: "all OK" }));
 
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
