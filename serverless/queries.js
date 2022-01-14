@@ -29,7 +29,7 @@ const getCentroids = (request, response) => {
         throw error;
       }
       console.log("*** RESULTS ***", results.row);
-      response.status(200).json(results.rows);
+      response.status(200).json({ message: "Hola" });
     }
   );
 };
