@@ -49,6 +49,11 @@ router.get("/", (req, res) => {
   res.end();
 });
 router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
+rouger.get("/test", (req, res) => {
+  res.writeHead(200, { "Content-Type": "application/json" });
+  res.write({ response: "Hola, amigo" });
+  res.end();
+});
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
