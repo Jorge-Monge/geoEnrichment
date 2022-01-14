@@ -1,0 +1,18 @@
+{
+  "name": "geoenrichment",
+  "version": "1.0.0",
+  "description": "RESTful API to geoenrich geometries with cloud geospatial data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jorge Monge",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^8.8.1"
+  }
+}
