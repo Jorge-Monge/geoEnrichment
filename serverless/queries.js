@@ -47,4 +47,4 @@ const getDissemAreas = async () => {
   }
 };
 
-module.exports = { get10FirstParks, getCentroids };
+module.exports = { get10FirstParks, getCentroids, getDissemAreas };
