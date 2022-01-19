@@ -54,8 +54,8 @@ router.get("/", (req, res) => {
 //   return { message: "all OK" };
 // };
 
-router.get("/getCentroids", (req, res) => {
-  db.getCentroids().then((response) => {
+router.get("/getDissemAreas", (req, res) => {
+  db.getDissemAreas().then((response) => {
     return res.json(response);
   });
 });
