@@ -38,7 +38,8 @@ const getDissemAreas = async () => {
         population AS "Population",
         ST_Y(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS latitude,
         ST_X(ST_CENTROID(ST_TRANSFORM(geometry, 4326))) AS longitude
-        FROM public.statscan_dissemination_areas`
+        FROM public.statscan_dissemination_areas
+        LIMIT 100`
     );
     return res.rows;
   } catch (err) {
