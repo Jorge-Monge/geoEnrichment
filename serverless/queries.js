@@ -87,8 +87,9 @@ const buildQuery = (geometry_parameter) => {
 
 const spitPopulation = async (WKT_geometry) => {
   try {
-    const res = await pool.query(buildQuery(WKT_geometry));
-    return res.rows;
+    //const res = await pool.query(buildQuery(WKT_geometry));
+    //return res.rows;
+    return buildQuery(WKT_geometry);
   } catch (err) {
     return { error: err.stack };
   }
