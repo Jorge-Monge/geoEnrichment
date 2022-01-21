@@ -30,6 +30,29 @@ const getCentroids = async () => {
   }
 };
 
+let geometry =
+  "POLYGON ((-114.09745931625366 51.08600294526029, -114.08872604370117 51.08600294526029, -114.08872604370117 51.09089545623681, -114.09745931625366 51.09089545623681, -114.09745931625366 51.08600294526029))";
+let queryGeom = `
+WITH userdata AS (SELECT ST_TRANSFORM(ST_SetSRID(ST_GeomFromText('${geometry}'), 4326), 3857) AS geom)
+, calculation AS (
+    SELECT dissem_area_uid,
+        population,
+        100 * ROUND(ST_AREA(ST_INTERSECTION(da.geom, userdata.geom)))/ROUND(ST_AREA(da.geom)) AS percentage_intersected
+    FROM public.statscan_dissemination_areas da, userdata
+    WHERE ST_INTERSECTS(da.geom, userdata.geom)
+)
+SELECT dissem_area_uid, ROUND(population*percentage_intersected) FROM calculation
+;`;
+
+const getPopulationByDissemAreasIntersected = async () => {
+  try {
+    const res = await pool.query(queryGeom);
+    return res.rows;
+  } catch (err) {
+    return { error: err.stack };
+  }
+};
+
 const getDissemAreas = async () => {
   try {
     const res = await pool.query(
@@ -48,4 +71,9 @@ const getDissemAreas = async () => {
   }
 };
 
-module.exports = { get10FirstParks, getCentroids, getDissemAreas };
+module.exports = {
+  get10FirstParks,
+  getCentroids,
+  getDissemAreas,
+  getPopulationByDissemAreasIntersected,
+};
