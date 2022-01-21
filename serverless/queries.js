@@ -71,7 +71,20 @@ const getDissemAreas = async () => {
   }
 };
 
-const spitPopulation = async (WKT) => {
+queryGeom = `
+WITH userdata AS (SELECT ST_TRANSFORM(ST_SetSRID(ST_GeomFromText('${geometry}'), 4326), 3857) AS geom)
+, calculation AS (
+    SELECT dissem_area_uid,
+        population,
+        100 * ROUND(ST_AREA(ST_INTERSECTION(da.geom, userdata.geom)))/ROUND(ST_AREA(da.geom)) AS percentage_intersected
+    FROM public.statscan_dissemination_areas da, userdata
+    WHERE ST_INTERSECTS(da.geom, userdata.geom)
+)
+SELECT dissem_area_uid AS "Dissemination Area ID", ROUND(population*percentage_intersected) AS "Population" FROM calculation
+;`;
+
+const spitPopulation = async (WKT_geometry) => {
+  geometry = WKT_geometry;
   try {
     const res = await pool.query(queryGeom);
     return res.rows;
