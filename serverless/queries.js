@@ -77,7 +77,7 @@ const buildQuery = (geometry_parameter) => {
   , calculation AS (
       SELECT dissem_area_uid,
           population,
-          100 * ROUND(ST_AREA(ST_INTERSECTION(da.geom, userdata.geom)))/ROUND(ST_AREA(da.geom)) AS percentage_intersected
+          ROUND(ST_AREA(ST_INTERSECTION(da.geom, userdata.geom)))/ROUND(ST_AREA(da.geom)) AS percentage_intersected
       FROM public.statscan_dissemination_areas da, userdata
       WHERE ST_INTERSECTS(da.geom, userdata.geom)
   )
