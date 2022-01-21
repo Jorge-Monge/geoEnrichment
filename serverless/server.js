@@ -1,40 +1,3 @@
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const db = require("./queries");
-
-// exports.handler = async (event, context) => {
-//   try {
-//     const app = express();
-//     const port = 3000;
-
-//     app.use(bodyParser.json());
-//     app.use(
-//       bodyParser.urlencoded({
-//         extended: true,
-//       })
-//     );
-
-//     app.get("/", (request, response) => {
-//       response.json({ info: "Node.js, Express, and Postgres API" });
-//     });
-
-//     app.get("/get10FirstParks", db.get10FirstParks);
-
-//     app.get("/getCentroid", db.getCentroid);
-
-//     app.listen(port, () => {
-//       console.log(`App running on port ${port}.`);
-//     });
-
-//     return {
-//       statusCode: 200,
-//       body: JSON.stringify(),
-//     };
-//   } catch (err) {
-//     return { statusCode: 422, body: err.stack };
-//   }
-// };
-
 ("use strict");
 const express = require("express");
 const path = require("path");
@@ -44,6 +7,10 @@ const bodyParser = require("body-parser");
 const db = require("./queries");
 
 const router = express.Router();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
 router.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
   res.write("<h1>Express.js + PostgreSQL!</h1>");
@@ -67,7 +34,7 @@ router.get("/getPopulationByDissemAreasIntersected", (req, res) => {
 });
 
 router.post("/spitPopulation", (req, res) => {
-  db.spitPopulation(req.body).then((response) => {
+  db.spitPopulation(req.body.geometry).then((response) => {
     return res.json(response);
   });
 });
