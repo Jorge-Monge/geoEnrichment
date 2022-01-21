@@ -66,6 +66,12 @@ router.get("/getPopulationByDissemAreasIntersected", (req, res) => {
   });
 });
 
+router.post("/spitPopulation", (req, res) => {
+  db.spitPopulation(req.body).then((response) => {
+    return res.json(response);
+  });
+});
+
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());

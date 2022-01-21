@@ -71,9 +71,28 @@ const getDissemAreas = async () => {
   }
 };
 
+const spitPopulation = async (WKT) => {
+  try {
+    const res = await pool.query(
+      `SELECT id AS "ID",
+        dissem_area_uid AS "Dissemination Area ID",
+        population,
+        ST_Y(ST_CENTROID(ST_TRANSFORM(geom, 4326))) AS latitude,
+        ST_X(ST_CENTROID(ST_TRANSFORM(geom, 4326))) AS longitude
+        FROM public.statscan_dissemination_areas
+        ORDER BY id ASC
+        LIMIT 100`
+    );
+    return res.rows;
+  } catch (err) {
+    return { error: err.stack };
+  }
+};
+
 module.exports = {
   get10FirstParks,
   getCentroids,
   getDissemAreas,
   getPopulationByDissemAreasIntersected,
+  spitPopulation,
 };
