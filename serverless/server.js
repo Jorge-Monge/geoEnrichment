@@ -61,7 +61,7 @@ router.get("/getDissemAreas", (req, res) => {
 });
 
 router.get("/getPopulationByDissemAreasIntersected", (req, res) => {
-  db.getDissemAreas().then((response) => {
+  db.getPopulationByDissemAreasIntersected().then((response) => {
     return res.json(response);
   });
 });
