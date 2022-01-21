@@ -72,7 +72,7 @@ const getDissemAreas = async () => {
 };
 
 queryGeom = `
-WITH userdata AS (SELECT ST_TRANSFORM(ST_SetSRID(ST_GeomFromText('${geometry}'), 4326), 3857) AS geom)
+WITH userdata AS (SELECT ST_TRANSFORM(ST_SetSRID(ST_GeomFromText('${0}'), 4326), 3857) AS geom)
 , calculation AS (
     SELECT dissem_area_uid,
         population,
@@ -84,9 +84,8 @@ SELECT dissem_area_uid AS "Dissemination Area ID", ROUND(population*percentage_i
 ;`;
 
 const spitPopulation = async (WKT_geometry) => {
-  geometry = WKT_geometry;
   try {
-    const res = await pool.query(queryGeom);
+    const res = await pool.query(queryGeom.format(WKT_geometry));
     return res.rows;
   } catch (err) {
     return { error: err.stack };
